@@ -1,0 +1,45 @@
+body{
+	background-color: rgba(0, 23, 63, 1.0);
+	color:#fff;
+}
+
+.navcolor{
+	background-color: rgba(0,23,63,1);
+}
+
+.title-font{
+	font-family: poppins, sans-serif;
+	color: rgba(221,130,31,1);
+	font-size: 8vh;
+	line-height: 10vh;
+	font-weight: 1000;
+
+
+
+}
+
+.tagline-font{
+	color:rgba(221,130,31,0.7);
+	line-height: 32px;
+	font-weight:;
+	font-size: 18px;
+	margin-top: -13px;
+	
+	font-family: roboto;
+}
+
+.brand-name{
+	font-size: 25px;
+	font-family: poppins;
+	color: rgba(221,130,31,1);
+	margin-left: 30px;
+	font-weight: 10px;
+	line-height: 10px;
+}
+
+.cron-guide{
+	margin-top: 15px;
+	color: #bcc2d1e8;
+	font-size: 16px;
+	line-height: 23px ;
+}

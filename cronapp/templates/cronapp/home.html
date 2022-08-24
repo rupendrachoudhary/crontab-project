@@ -1,0 +1,24 @@
+{% extends "cronapp/base.html" %}
+
+
+{% block content %}
+<div>
+   <h1 class="text-center title-font">Crontab Generating Ninja</h1>
+   
+   <p class="text-center tagline-font">Automate your task with our Ninja and save the time</p>
+   
+
+</div>
+
+<div class="container my-4 cron-guide">
+   <p>If you want to periodically perform a task (e.g. sending Emails, backing up database, doing regular maintenance, etc.) at specified times and dates, there are two ways to set scheduled tasks:</p>
+<ul>
+   <li> Method 1: Use our online cron job service that will save you a headache.</li>
+   <li>Method 2: Use Cron available in Unix/Linux systems.</li>
+</ul>
+<p>
+If you go with method 2, the following generator can help you produce a crontab syntax that you can copy & paste to your crontab file (You can open the file by using command crontab –e). Below the generated crontab syntax, a list of run times will be displayed too. The predictions will help you ensure that you set the time and date right.</p>
+
+   </div>
+   
+{% endblock %}
