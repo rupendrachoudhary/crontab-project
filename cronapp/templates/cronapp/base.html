@@ -17,18 +17,29 @@
 	</title>
 </head>
 <body>
-	<nav class="navbar navbar-light navcolor">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-     <!-- <img src="" alt="" width="30" height="23" class="d-inline-block align-text-top"> -->
-      <b class="brand-name">CroNinja</b>
-    </a>
-  </div>
-</nav>
+  <header class="site-header">
+      <nav class="navbar navbar-expand-md navcolor">
+          <div class="container">
+             <a class="navbar-brand mr-4 brand-name" href="{% url 'cronapp-home' %}"><b>CroNinja</b></a>
+           
+          <div class="navbar-nav ms-auto">
+              <a class="nav-item nav-link right-menu" href="{% url 'cronapp-blog' %}">Blog</a>
+              <a class="nav-item nav-link right-menu" href="{% url 'cronapp-contact' %}">Contact us</a>
+          </div>
+     <!-- <b class="brand-name">CroNinja</b> -->
+    </div>
+  
+  
+</nav> 
+</header>
+
 	<div class="container">
+         <h1 class="text-center title-font">Crontab Generating Ninja</h1>
+           <p class="text-center tagline-font">Automate your task with our Ninja and save the time</p>
+       <hr>
         {% block content %}
         {% endblock %}
-    </div>
+  </div>
 
 
     <!-- Optional JavaScript; choose one of the two! -->

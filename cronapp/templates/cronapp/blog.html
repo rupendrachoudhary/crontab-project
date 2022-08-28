@@ -1,0 +1,331 @@
+{% extends "cronapp/base.html" %}
+
+{% block content %}
+ 
+<div class="container cron-blog">
+   <h2>CronTab Mannual </h2>
+
+<br>
+
+<h3>Cron</h3>
+
+<p class="cron-blog-para">This file is an introduction to cron, it covers the basics of what cron does,
+and how to use it.</p>
+
+<h3>What is cron?</h3>
+
+<p class="cron-blog-para">Cron is the name of program that enables unix users to execute commands or
+scripts (groups of commands) automatically at a specified time/date. It is
+normally used for sys admin commands, like makewhatis, which builds a
+search database for the man -k command, or for running a backup script, 
+but can be used for anything. A common use for it today is connecting to 
+the internet and downloading your email.</p>
+
+
+<h3>How to start Cron</h3>
+
+<p class="cron-blog-para">Cron is a daemon, which means that it only needs to be started once, and will 
+lay dormant until it is required. A Web server is a daemon, it stays dormant 
+until it gets asked for a web page. The cron daemon, or crond, stays dormant 
+until a time specified in one of the config files, or crontabs.</p>
+
+<p class="cron-blog-para">On most Linux distributions crond is automatically installed and entered into 
+the start up scripts. To find out if it's running do the following:</p>
+
+<code>cog@pingu $ ps aux | grep crond</code>
+<pre class="pre-color">
+root       311  0.0  0.7  1284  112 ?        S    Dec24   0:00 crond
+cog       8606  4.0  2.6  1148  388 tty2     S    12:47   0:00 grep crond
+</pre>
+
+<p class="cron-blog-para">The top line shows that crond is running, the bottom line is the search
+we just run.</p>
+
+<p class="cron-blog-para">If it's not running then either you killed it since the last time you rebooted,
+or it wasn't started.</p>
+
+<p class="cron-blog-para">To start it, just add the line crond to one of your start up scripts. The 
+process automatically goes into the back ground, so you don't have to force
+it with &. Cron will be started next time you reboot. To run it without 
+rebooting, just type crond as root:</p>
+
+<code>root@pingu # crond</code>
+
+<p class="cron-blog-para">With lots of daemons, (e.g. httpd and syslogd) they need to be restarted 
+after the config files have been changed so that the program has a chance 
+to reload them. Vixie Cron will automatically reload the files after they 
+have been edited with the crontab command. Some cron versions reload the
+files every minute, and some require restarting, but Vixie Cron just loads 
+the files if they have changed.</p>
+
+<h3>Using cron</h3>
+
+<p class="cron-blog-para">There are a few different ways to use cron (surprise, surprise). </p>
+
+<p class="cron-blog-para">In the /etc directory you will probably find some sub directories called 
+'cron.hourly', 'cron.daily', 'cron.weekly' and 'cron.monthly'. If you place 
+a script into one of those directories it will be run either hourly, daily, 
+weekly or monthly, depending on the name of the directory. </p>
+
+<p class="cron-blog-para">If you want more flexibility than this, you can edit a crontab (the name 
+for cron's config files). The main config file is normally /etc/crontab.
+On a default RedHat install, the crontab will look something like this:</p>
+
+<code>
+root@pingu # cat /etc/crontab
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+HOME=/
+</code>
+<pre class="pre-color">
+# run-parts
+01 * * * * root run-parts /etc/cron.hourly
+02 4 * * * root run-parts /etc/cron.daily
+22 4 * * 0 root run-parts /etc/cron.weekly
+42 4 1 * * root run-parts /etc/cron.monthly
+</pre>
+
+<p class="cron-blog-para">The first part is almost self explanatory; it sets the variables for cron.</p>
+
+<p class="cron-blog-para">SHELL is the 'shell' cron runs under. If unspecified, it will default to 
+the entry in the /etc/passwd file.</p>
+
+<p class="cron-blog-para">PATH contains the directories which will be in the search path for cron 
+e.g if you've got a program 'foo' in the directory /usr/cog/bin, it might 
+be worth adding /usr/cog/bin to the path, as it will stop you having to use
+the full path to 'foo' every time you want to call it.</p>
+
+<p class="cron-blog-para">MAILTO is who gets mailed the output of each command. If a command cron is 
+running has output (e.g. status reports, or errors), cron will email the output 
+to whoever is specified in this variable. If no one if specified, then the 
+output will be mailed to the owner of the process that produced the output.</p>
+
+<p class="cron-blog-para">HOME is the home directory that is used for cron. If unspecified, it will 
+default to the entry in the /etc/passwd file.</p>
+
+<p class="cron-blog-para">Now for the more complicated second part of a crontab file.
+An entry in cron is made up of a series of fields, much like the /etc/passwd
+file is, but in the crontab they are separated by a space. There are normally
+seven fields in one entry. The fields are:</p>
+
+<h4>minute hour dom month dow user cmd</h4>
+
+<b>minute</b><p class="cron-blog-para">	This controls what minute of the hour the command will run on,
+	 and is between '0' and '59'</p>
+<b>hour</b><p class="cron-blog-para">	This controls what hour the command will run on, and is specified in
+         the 24 hour clock, values must be between 0 and 23 (0 is midnight)</p>
+<b>dom</b><p class="cron-blog-para">	This is the Day of Month, that you want the command run on, e.g. to
+	 run a command on the 19th of each month, the dom would be 19.</p>
+<b>month</b><p class="cron-blog-para">	This is the month a specified command will run on, it may be specified
+	 numerically (0-12), or as the name of the month (e.g. May)</p>
+<b>dow</b><p class="cron-blog-para">	This is the Day of Week that you want a command to be run on, it can
+	 also be numeric (0-7) or as the name of the day (e.g. sun).</p>
+<b>user</b><p class="cron-blog-para">	This is the user who runs the command.</p>
+<p>cmd	This is the command that you want run. This field may contain multiple words or spaces.</p>
+
+<p class="cron-blog-para">If you don't wish to specify a value for a field, just place a * in the 
+field.</p>
+
+<pre class="pre-color">
+
+01 * * * * root echo "This command is run at one min past every hour"
+17 8 * * * root echo "This command is run daily at 8:17 am"
+17 20 * * * root echo "This command is run daily at 8:17 pm"
+00 4 * * 0 root echo "This command is run at 4 am every Sunday"
+* 4 * * Sun root echo "So is this"
+42 4 1 * * root echo "This command is run 4:42 am every 1st of the month"
+01 * 19 07 * root echo "This command is run hourly on the 19th of July"
+</pre>
+
+<b>Notes:</b>
+
+<p class="cron-blog-para">Under dow 0 and 7 are both Sunday.</p>
+
+<p class="cron-blog-para">If both the dom and dow are specified, the command will be executed when
+either of the events happen. </p>
+
+<pre class="pre-color">
+
+* 12 16 * Mon root cmd
+</pre>
+<p class="cron-blog-para">Will run cmd at midday every Monday and every 16th, and will produce the 
+same result as both of these entries put together would:</p>
+<pre class="pre-color">
+* 12 16 * * root cmd
+* 12 * * Mon root cmd
+</pre>
+
+<p class="cron-blog-para">Vixie Cron also accepts lists in the fields. Lists can be in the form, 1,2,3 
+(meaning 1 and 2 and 3) or 1-3 (also meaning 1 and 2 and 3).</p>
+<pre class="pre-color">
+
+59 11 * * 1,2,3,4,5 root backup.sh
+Will run backup.sh at 11:59 Monday, Tuesday, Wednesday, Thursday and Friday,
+as will:
+59 11 * * 1-5 root backup.sh 
+</pre>
+
+<p class="cron-blog-para">Cron also supports 'step' values.
+A value of */2 in the dom field would mean the command runs every two days
+and likewise, */5 in the hours field would mean the command runs every 
+5 hours.</p>
+<pre class="pre-color">
+
+* 12 10-16/2 * * root backup.sh
+is the same as:
+* 12 10,12,14,16 * * root backup.sh
+
+*/15 9-17 * * * root connection.test
+Will run connection.test every 15 mins between the hours or 9am and 5pm
+
+Lists can also be combined with each other, or with steps:
+* 12 1-15,17,20-25 * * root cmd
+Will run cmd every midday between the 1st and the 15th as well as the 20th 
+and 25th (inclusive) and also on the 17th of every month.
+* 12 10-16/2 * * root backup.sh
+is the same as:
+* 12 10,12,14,16 * * root backup.sh
+</pre>
+
+<p class="cron-blog-para">
+When using the names of weekdays or months, it isn't case sensitive, but only
+the first three letters should be used, e.g. Mon, sun or Mar, jul.
+</p>
+
+<p class="cron-blog-para">
+Comments are allowed in crontabs, but they must be preceded with a '#', and
+must be on a line by them self.  </p>
+
+
+<h3>Multiuser cron</h3>
+
+<p class="cron-blog-para">As Unix is a multiuser OS, some of the apps have to be able to support 
+multiple users, cron is one of these. Each user can have their own crontab
+file, which can be created/edited/removed by the command crontab. This
+command creates an individual crontab file and although this is a text file,
+as the /etc/crontab is, it shouldn't be edited directly. The crontab file is
+often stored in /var/spool/cron/crontabs/<user> (Unix/Slackware/*BSD), 
+/var/spool/cron/<user> (RedHat) or /var/cron/tabs/<user> (SuSE), 
+but might be kept elsewhere depending on what Un*x flavor you're running.</p>
+
+<p class="cron-blog-para">To edit (or create) your crontab file, use the command crontab -e, and this
+will load up the editor specified in the environment variables EDITOR or 
+VISUAL, to change the editor invoked on Bourne-compliant shells, try: </p>
+
+<code>
+cog@pingu $ export EDITOR=vi
+On C shells:
+cog@pingu $ setenv EDITOR vi
+</code>
+
+<p class="cron-blog-para">You can of course substitute vi for the text editor of your choice.</p>
+
+<p class="cron-blog-para">Your own personal crontab follows exactly the same format as the main
+/etc/crontab file does, except that you need not specify the MAILTO 
+variable, as this entry defaults to the process owner, so you would be mailed
+the output anyway, but if you so wish, this variable can be specified.
+You also need not have the user field in the crontab entries. e.g.</p>
+
+<h3>min hr dom month dow cmd</h3>
+
+<p class="cron-blog-para">Once you have written your crontab file, and exited the editor, then it will
+check the syntax of the file, and give you a chance to fix any errors.</p>
+
+<p class="cron-blog-para">If you want to write your crontab without using the crontab command, you can
+write it in a normal text file, using your editor of choice, and then use the
+crontab command to replace your current crontab with the file you just wrote.</p>
+<p class="cron-blog-para">if you wrote a crontab called cogs.cron.file, you would use the cmd</p>
+
+<code>cog@pingu $ crontab cogs.cron.file</code>
+
+<p class="cron-blog-para">to replace your existing crontab with the one in cogs.cron.file.</p>
+
+<p class="cron-blog-para">You can use </p>
+
+<code>cog@pingu $ crontab -l </code>
+<p class="cron-blog-para">to list your current crontab, and </p>
+
+<code>cog@pingu $ crontab -r </code>
+
+<p class="cron-blog-para">will remove (i.e. delete) your current crontab.</p>
+
+<p class="cron-blog-para">Privileged users can also change other user's crontab with:</p>
+
+<code>root@pingu # crontab -u  </code>
+
+<p class="cron-blog-para">and then following it with either the name of a file to replace the 
+existing user's crontab, or one of the -e, -l or -r options.</p>
+
+<p class="cron-blog-para">According to the documentation the crontab command can be confused by the 
+su command, so if you running a su'ed shell, then it is recommended you 
+use the -u option anyway.</p>
+
+<h3>Controlling Access to cron</h3>
+
+<p class="cron-blog-para">Cron has a built in feature of allowing you to specify who may, and who 
+may not use it. It does this by the use of /etc/cron.allow and /etc/cron.deny
+files. These files work the same way as the allow/deny files for other 
+daemons do. To stop a user using cron, just put their name in cron.deny, to
+allow a user put their name in the cron.allow. If you wanted to prevent all
+users from using cron, you could add the line ALL to the cron.deny file:</p>
+
+<code>root@pingu # echo ALL >>/etc/cron.deny</code>
+
+<p class="cron-blog-para">If you want user cog to be able to use cron, you would add the line cog 
+to the cron.allow file:</p>
+
+<code>root@pingu # echo cog >>/etc/cron.allow</code>
+
+<p class="cron-blog-para">If there is neither a cron.allow nor a cron.deny file, then the use of cron
+is unrestricted (i.e. every user can use it).  If you were to put the name of
+some users into the cron.allow file, without creating a cron.deny file, it
+would have the same effect as creating a cron.deny file with ALL in it.
+This means that any subsequent users that require cron access should be 
+put in to the cron.allow file.  </p>
+
+<h3>Output from cron</h3>
+
+<p class="cron-blog-para">As I've said before, the output from cron gets mailed to the owner of the
+process, or the person specified in the MAILTO variable, but what if you
+don't want that? If you want to mail the output to someone else, you can
+just pipe the output to the command mail.</p>
+
+
+<code>cmd | mail -s "Subject of mail" user</code>
+
+<p class="cron-blog-para">If you wish to mail the output to someone not located on the machine, in the
+above example, substitute user for the email address of the person who 
+wishes to receive the output.</p>
+
+<p>If you have a command that is run often, and you don't want to be emailed 
+the output every time, you can redirect the output to a log file (or 
+/dev/null, if you really don't want the output).</p>
+
+
+ <code>
+cmd >> log.file
+</code>
+
+<p class="cron-blog-para">Notice we're using two > signs so that the output appends the log file and 
+doesn't clobber previous output.</p>
+<p class="cron-blog-para">The above example only redirects the standard output, not the standard error,
+if you want all output stored in the log file, this should do the trick:</p>
+
+<code>cmd >> logfile 2>&1</code>
+
+<p class="cron-blog-para">You can then set up a cron job that mails you the contents of the file at
+specified time intervals, using the cmd:</p>
+
+<code>mail -s "logfile for cmd" <log.file></code>
+ 
+
+<p class="cron-blog-para">Now you should be able to use cron to automate things a bit more.
+A future file going into more detail, explaining the differences between 
+the various different crons and with more worked examples, is planned.</p>
+
+
+
+</div>
+
+{% endblock %}

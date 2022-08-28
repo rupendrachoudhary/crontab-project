@@ -1,6 +1,8 @@
 body{
 	background-color: rgba(0, 23, 63, 1.0);
 	color:#fff;
+	font-family: poppins;
+
 }
 
 .navcolor{
@@ -13,6 +15,7 @@ body{
 	font-size: 8vh;
 	line-height: 10vh;
 	font-weight: 1000;
+	margin-top: 30px;
 
 
 
@@ -40,6 +43,31 @@ body{
 .cron-guide{
 	margin-top: 15px;
 	color: #bcc2d1e8;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 23px ;
 }
+
+.cron-blog{
+	color: #bcc2d1e8;
+}
+
+.cron-blog-para{
+	color: #bcc2d1e8;
+	font-size: 18px;
+	line-height: 23px ;
+}
+
+.pre-color{
+	color: #1ee5d4;
+}
+
+.right-menu{
+	color: rgba(221, 130, 31, 1.0);
+	font-family: poppins;
+	font-size: 20px;
+}
+
+.brand-name{
+	font-size: 30px;
+}
+
