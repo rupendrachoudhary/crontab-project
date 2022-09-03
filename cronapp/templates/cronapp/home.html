@@ -1,155 +1,521 @@
 {% extends "cronapp/base.html" %}
 
-
 {% block content %}
 
 
-<div class="container my-4 cron-guide">
-   <p>If you want to periodically perform a task (e.g. sending Emails, backing up database, doing regular maintenance, etc.) at specified times and dates, there are two ways to set scheduled tasks:</p>
-<ul>
-   <li> Method 1: Use our online cron job service that will save you a headache.</li>
-   <li>Method 2: Use Cron available in Unix/Linux systems.</li>
-</ul>
-<p>
-If you go with method 2, the following generator can help you produce a crontab syntax that you can copy & paste to your crontab file (You can open the file by using command crontab –e). Below the generated crontab syntax, a list of run times will be displayed too. The predictions will help you ensure that you set the time and date right.</p>
+<div class="container my-4 cron-guide" style="font-family: poppins;">
+    <p>If you want to periodically perform a task (e.g. sending Emails, backing up database, doing regular maintenance,
+        etc.) at specified times and dates, there are two ways to set scheduled tasks:</p>
+    <ul>
+        <li> Method 1: Use our online cron job service that will save you a headache.</li>
+        <li>Method 2: Use Cron available in Unix/Linux systems.</li>
+    </ul>
+    <p>
+        If you go with method 2, the following generator can help you produce a crontab syntax that you can copy & paste
+        to your crontab file (You can open the file by using command crontab –e). Below the generated crontab syntax, a
+        list of run times will be displayed too. The predictions will help you ensure that you set the time and date
+        right.</p>
 
-   </div>
-<div class="container">
+</div>
+
 
 <h2 class="cron-blog">Generate Cron Expression</h2>
 
-   <div class="card text-center my-4" style="min-height:300px">
-        <div class="card-header">
-          <!--  <ul class="nav nav-tabs card-header-tabs">
-                <li class="nav-item">
-                <a class="nav-link active" aria-current="true" href="#">Minute</a>
-                </li>
-              
-                <li class="nav-item">
-                <a class="nav-link" href="#">Hour</a>
-                </li>
-      
-                <li class="nav-item">
-                <a class="nav-link" href="#">Day(Month)</a>
-                </li>
-      
-                <li class="nav-item">
-                <a class="nav-link" href="#">Month</a>
-                </li>
-      
-                <li class="nav-item">
-                <a class="nav-link" href="#">Day(Week)</a>
-                </li>
-           </ul> -->
-           <ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Minute</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Hour</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Day(Month)</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Month</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Day(Week)</button>
-  </li>
-</ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-</div>
-        </div>
 
-  <div class="card-body">
-    <div class="form-row align-items-center">
-        <div class="col-auto">
-            <label class="col-form-label">Every</label>
+<div class="container my-4 style-generator" style="color:black">
+        <div class="card" style="min-height:300px">
+
+            <div class="card-header">
+               <!-- <h5 class="card-title">CronTab Generator</h5> -->
+                <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="minute-tab" data-bs-toggle="tab"
+                                data-bs-target="#minute-tab-pane" type="button" role="tab" aria-controls="minute"
+                                aria-selected="true">Minute
+                        </button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="hour-tab" data-bs-toggle="tab" data-bs-target="#hour-tab-pane"
+                                type="button" role="tab" aria-controls="hour" aria-selected="false">Hour
+                        </button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="day-tab" data-bs-toggle="tab" data-bs-target="#day-tab-pane"
+                                type="button" role="tab" aria-controls="day" aria-selected="false">Day(Month)
+                        </button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="month-tab" data-bs-toggle="tab" data-bs-target="#month-tab-pane"
+                                type="button" role="tab" aria-controls="month" aria-selected="false">Month
+                        </button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="week-tab" data-bs-toggle="tab" data-bs-target="#week-tab-pane"
+                                type="button" role="tab" aria-controls="week" aria-selected="false">Day(Week)
+                        </button>
+                    </li>
+                </ul>
+            </div>
+         <div>
+            <form class="card-body form-control" method="GET" action="">
+                <div class="tab-content" id="myTabContent">
+
+                   <div class="tab-pane fade show active" id="minute-tab-pane" role="tabpanel"
+                         aria-labelledby="minute-tab" tabindex="0">
+                        <div class="row align-items-center">
+                           
+               <table class="generator">
+                  <tr>
+                     <td>
+               <table  class="generator-1">
+                  <tbody>
+                     <tr>
+                        <td class="shortcut-margin">
+                           <div>
+                            <label class="radio" for="everyMinute"><input id="everyMinute" type="radio" checked="checked" value="*" name="minutes">
+                                Every Minute</label>
+                             </div>
+                             <div>
+                            <label class="radio" for="every5Minute"><input id="every5Minute" type="radio" value="*/5" name="minutes">
+                                Every 5 Minutes</label>
+                             </div>
+                             <div>
+                            <label class="radio" for="every10Minute"><input id="every10Minute" type="radio" value="*/10" name="minutes">
+                                Every 10 Minutes</label>
+                             </div>
+                             <div>
+                            <label class="radio" for="every15Minute"><input id="every15Minute" type="radio" value="*/15" name="minutes">
+                                Every 15 Minutes</label>
+                             </div>
+                             <div>
+                            <label class="radio" for="every20Minute"><input id="every20Minute" type="radio" value="*/20" name="minutes">
+                                Every 20 Minutes</label>
+                             </div>
+                            <div>
+                            <label class="radio" for="every30Minute"><input id="every30Minute" type="radio" value="*/30" name="minutes">
+                                Every 30 Minutes</label>
+                             </div>
+                             <div>
+                            <label class="radio" for="everyEvenMinute"><input id="everyEvenMinute" type="radio" value="*/2" name="minutes">
+                                Every Even Minute</label>
+                             </div>
+                             <div>
+
+                            <label class="radio" for="everyOddMinute"><input id="everyOddMinute" type="radio" value="1-59/2" name="minutes">
+                                Every Odd Minute</label></div>
+
+                        </td>
+                        <td>
+                           <table class="generator-2">
+                              <tbody>
+                                 <tr>
+                                    <td>
+                                      <input type="radio" value="select" name="minutes" class="radio-margin"> 
+                                    </td>
+                                    <td>
+                                                <select multiple size="10" name="selectMinutes">
+                                                <option value="0">0</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                                <option value="21">21</option>
+                                                <option value="22">22</option>
+                                                <option value="23">23</option>
+                                                <option value="24">24</option>
+                                                <option value="25">25</option>
+                                                <option value="26">26</option>
+                                                <option value="27">27</option>
+                                                <option value="28">28</option>
+                                                <option value="29">29</option>
+                                                <option value="30">30</option>
+                                                <option value="31">31</option>
+                                                <option value="32">32</option>
+                                                <option value="33">33</option>
+                                                <option value="34">34</option>
+                                                <option value="35">35</option>
+                                                <option value="36">36</option>
+                                                <option value="37">37</option>
+                                                <option value="38">38</option>
+                                                <option value="39">39</option>
+                                                <option value="40">40</option>
+                                                <option value="41">41</option>
+                                                <option value="42">42</option>
+                                                <option value="43">43</option>
+                                                <option value="44">44</option>
+                                                <option value="45">45</option>
+                                                <option value="46">46</option>
+                                                <option value="47">47</option>
+                                                <option value="48">48</option>
+                                                <option value="49">49</option>
+                                                <option value="50">50</option>
+                                                <option value="51">51</option>
+                                                <option value="52">52</option>
+                                                <option value="53">53</option>
+                                                <option value="54">54</option>
+                                                <option value="55">55</option>
+                                                <option value="56">56</option>
+                                                <option value="57">57</option>
+                                                <option value="58">58</option>
+                                                <option value="59">59</option>
+                                                </select>
+                                            </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table> 
+              </td>
+           </tr>
+        </table>
+     </div>
+  </div>
+
+               <div class="tab-pane fade" id="hour-tab-pane" role="tabpanel" aria-labelledby="hour-tab" tabindex="0">
+                    
+                        <div class="row align-items-center">
+                           
+               <table class="generator">
+                  <tr>
+                     <td>
+               <table  class="generator-1">
+                  <tbody>
+                     <tr>
+                        <td>
+                           <div>
+                            <label class="radio" for="everyHour"><input id="everyHour" type="radio" checked="checked" value="*" name="hours">
+                                Every Hour</label>
+                             </div>
+                             <div>
+                            <label class="radio" for="every1Hour"><input id="every1Hour" type="radio" value="*/1" name="hours">
+                                Every 1 Hour</label>
+                             </div>
+                             <div>
+                            <label class="radio" for="every3Hour"><input id="every3Hour" type="radio" value="*/3" name="hours">
+                                Every 3 Hour</label>
+                             </div>
+                             <div>
+                            <label class="radio" for="every5Hour"><input id="every5Hour" type="radio" value="*/5" name="hours">
+                                Every 5 Hour</label></div>
+                           <div>     
+                            <label class="radio" for="every6Hours"><input id="every6Hours" type="radio" value="*/6" name="hours">
+                                Every 6 Hours</label></div>
+                                <div>
+                            <label class="radio" for="every12Hours"><input id="every12Hours" type="radio" value="*/12" name="hours">
+                                Every 12 Hours</label></div>
+                                <div>
+                            <label class="radio" for="everyEvenHour"><input id="everyEvenHour" type="radio" value="*/2" name="hours">
+                                Every Even Hours</label></div>
+                                <div>
+                            <label class="radio" for="everyOddHour"><input id="everyOddHour" type="radio" value="1-23/2" name="hours">
+                                Every Odd Hours</label></div>
+                        </td>
+                        <td> 
+                           <table class="generator-2">
+                              <tbody>
+                                 <tr>
+                                    <td>
+                                      <input type="radio" value="select" name="hours" class="radio-margin"> 
+                                    </td>
+                                    <td>
+                                            <select multiple size="10" name="selectHours">
+                                                <option value="0">Midnight</option>
+                                                <option value="1">1am</option>
+                                                <option value="2">2am</option>
+                                                <option value="3">3am</option>
+                                                <option value="4">4am</option>
+                                                <option value="5">5am</option>
+                                                <option value="6">6am</option>
+                                                <option value="7">7am</option>
+                                                <option value="8">8am</option>
+                                                <option value="9">9am</option>
+                                                <option value="10">10am</option>
+                                                <option value="11">11am</option>
+                                                <option value="12">Noon</option>
+                                                <option value="13">1pm</option>
+                                                <option value="14">2pm</option>
+                                                <option value="15">3pm</option>
+                                                <option value="16">4pm</option>
+                                                <option value="17">5pm</option>
+                                                <option value="18">6pm</option>
+                                                <option value="19">7pm</option>
+                                                <option value="20">8pm</option>
+                                                <option value="21">9pm</option>
+                                                <option value="22">10pm</option>
+                                                <option value="23">11pm</option>
+                                                </select>                                           
+                                     </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table> 
+              </td>
+           </tr>
+        </table>
+     </div>
+  </div>
+
+                <div class="tab-pane fade" id="day-tab-pane" role="tabpanel" aria-labelledby="day-tab" tabindex="0">
+                <div class="row align-items-center">
+                           
+               <table class="generator">
+                  <tr>
+                     <td>
+               <table  class="generator-1">
+                  <tbody>
+                     <tr>
+                        <td>
+                             <div><label class="radio" for="everyday"><input id="everyday" type="radio" checked="checked" value="*" name="days">
+                              Every Day</label></div>
+                               <div> 
+                              <label class="radio" for="every5Days"><input id="every5Days" type="radio" value="*/5" name="days">
+                              Every 5 Days</label></div>
+                              <div>
+                              <label class="radio" for="every7Days"><input id="every7Days" type="radio" value="*/7" name="days">
+                              Every 7 Days</label> 
+                              </div>
+                              <div>                           
+                              <label class="radio" for="every10Days"><input id="every10Days" type="radio" value="*/10" name="days">
+                              Every 10 Days</label>
+                           </div>
+                           <div>
+                              <label class="radio" for="every15Days"><input id="every15Days" type="radio" value="*/15" name="days">
+                              Every Half Month</label></div>
+                              <div>
+                              <label class="radio" for="everyEvenDay"><input id="everyEvenDay" type="radio" value="2-31/2" name="days">
+                              Even Days</label>
+                           </div>
+                           <div>
+                              <label class="radio" for="everyOddDay"><input id="everyOddDay" type="radio" value="1-31/2" name="days">
+                              Odd Days</label></div>
+                        </td>
+                        <td>
+                           <table class="generator-2">
+                              <tbody>
+                                 <tr>
+                                    <td>
+                                      <input type="radio" value="select" name="days" class="radio-margin"> 
+                                    </td>
+                                    <td>
+                                          <select multiple size="10" name="selectDays">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                                <option value="21">21</option>
+                                                <option value="22">22</option>
+                                                <option value="23">23</option>
+                                                <option value="24">24</option>
+                                                <option value="25">25</option>
+                                                <option value="26">26</option>
+                                                <option value="27">27</option>
+                                                <option value="28">28</option>
+                                                <option value="29">29</option>
+                                                <option value="30">30</option>
+                                                <option value="31">31</option>
+                                                </select>
+                                       
+                                     </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table> 
+              </td>
+           </tr>
+        </table>
+     </div>
+  </div>
+
+                <div class="tab-pane fade" id="month-tab-pane" role="tabpanel" aria-labelledby="month-tab" tabindex="0">
+                  <div class="row align-items-center">
+                           
+               <table class="generator">
+                  <tr>
+                     <td>
+               <table  class="generator-1">
+                  <tbody>
+                     <tr>
+                        <td>
+                                <div>
+                                <label class="radio" for="everyMonth"><input id="everyMonth" type="radio" checked="checked" value="*" name="months">
+                                 Every Month</label> 
+                                 </div>
+                                 <div>                               
+                                 <label class="radio" for="every3Months"><input id="every3Months" type="radio" value="*/3" name="months">
+                                 Every Quarter</label>
+                              </div>
+                              <div>
+                                 <label class="radio" for="every4Months"><input id="every4Months" type="radio" value="*/4" name="months">
+                                 Every 4 Months</label>
+                              </div>
+                              <div>
+                                 <label class="radio" for="every6Months"><input id="every6Months" type="radio" value="*/6" name="months">
+                                 Every Half Year</label>
+                              </div>
+                              <div>
+                                 <label class="radio" for="everyEvenMonths"><input id="everyEvenMonths" type="radio" value="*/2" name="months">
+                                 Even Months</label></div>
+                                 <div>
+                                 <label class="radio" for="everyOddMonths"><input id="everyOddMonths" type="radio" value="1-11/2" name="months">
+                                 Odd Months</label></div>
+                        </td>
+                        <td>
+                           <table class="generator-2">
+                              <tbody>
+                                 <tr>
+                                    <td>
+                                      <input type="radio" value="select" name="months" class="radio-margin"> 
+                                    </td>
+                                    <td>
+                                          <select multiple size="10" name="selectMonths" class="cron">
+                                                <option value="1">Jan</option>
+                                                <option value="2">Feb</option>
+                                                <option value="3">Mar</option>
+                                                <option value="4">Apr</option>
+                                                <option value="5">May</option>
+                                                <option value="6">Jun</option>
+                                                <option value="7">Jul</option>
+                                                <option value="8">Aug</option>
+                                                <option value="9">Sep</option>
+                                                <option value="10">Oct</option>
+                                                <option value="11">Nov</option>
+                                                <option value="12">Dec</option>
+                                                </select>
+                                     </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table> 
+              </td>
+           </tr>
+        </table>
+     </div>
+   </div>
+            
+
+             <div class="tab-pane fade" id="week-tab-pane" role="tabpanel" aria-labelledby="week-tab" tabindex="0">
+                <div class="row align-items-center">
+                           
+               <table class="generator">
+                  <tr>
+                     <td>
+               <table  class="generator-1">
+                  <tbody>
+                     <tr>
+                        <td>
+                               <div>
+                                <label class="radio" for="everyWeekday"><input id="everyWeekday" name="weekdays" value="*" checked="checked" type="radio">
+                                Every Day</label></div>
+                                <div>
+                                <label class="radio" for="everyNonWeekenDays"><input id="everyNonWeekenDays" name="weekdays" value="1-5" type="radio">
+                                Monday - Friday</label></div>
+                                <div>
+                                <label class="radio" for="everyWeekenDays"><input id="everyWeekenDays" name="weekdays" value="0,6" type="radio">
+                                Saturday - Sunday</label> </div>
+                                <div>
+                                <label class="radio" for="mondaytothursday"><input id="mondaytothursday" name="weekdays" value="1-4" type="radio">
+                                Monday - Thursday</label>  </div>
+                                <div>
+                                <label class="radio" for="everysunday"><input id="everysunday" name="weekdays" value="0" type="radio">
+                                Sunday</label>    </div>                 
+                         </td>
+                        <td>
+                           <table class="generator-2">
+                              <tbody>
+                                 <tr>
+                                    <td>
+                                      <input type="radio" value="select" name="weekdays" class="radio-margin"> 
+                                    </td>
+                                    <td>
+                                         <select multiple size="10" name="selectWeekdays">
+                                                <option value="0">Sun</option>
+                                                <option value="1">Mon</option>
+                                                <option value="2">Tue</option>
+                                                <option value="3">Wed</option>
+                                                <option value="4">Thu</option>
+                                                <option value="5">Fri</option>
+                                                <option value="6">Sat</option>
+                                                </select>
+                                     </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table> 
+              </td>
+           </tr>
+        </table>
+     </div>    
+   </div>
+              
+        
+
+        
+        </form>
+</div>
+<div class="card-footer">
+            <button class="btn btn-primary" type="submit" name="submit">Generate</button>
         </div>
-        <div class="col-md-1">
-            <select multiple size="10" class="form-control" name="pnlDetails:pnlMinutes:ddMinutes">
-                    <option selected="selected" value="0">0</option>
-                     <option value="1">1</option>
-                     <option value="2">2</option>
-                     <option value="2">3</option>
-                     <option value="4">4</option>
-                     <option value="5">5</option>
-                     <option value="6">6</option>
-                     <option value="7">7</option>
-                     <option value="8">8</option>
-                     <option value="9">9</option>
-                     <option value="10">10</option>
-                     <option value="11">11</option>
-                     <option value="12">12</option>
-                     <option value="13">13</option>
-                     <option value="14">14</option>
-                     <option value="15">15</option>
-                     <option value="16">16</option>
-                     <option value="17">17</option>
-                     <option value="18">18</option>
-                     <option value="19">19</option>
-                     <option value="20">20</option>
-                     <option value="21">21</option>
-                     <option value="22">22</option>
-                     <option value="23">23</option>
-                     <option value="24">24</option>
-                     <option value="25">25</option>
-                     <option value="26">26</option>                          
-                     <option value="27">27</option>
-                     <option value="28">28</option>
-                     <option value="29">29</option>
-                     <option value="30">30</option>
-                     <option value="31">31</option>
-                     <option value="32">32</option>
-                     <option value="33">33</option>
-                     <option value="34">34</option>
-                     <option value="35">35</option>
-                     <option value="36">36</option>
-                     <option value="37">37</option>
-                     <option value="38">38</option>
-                     <option value="39">39</option>
-                     <option value="40">40</option>
-                     <option value="41">41</option>
-                     <option value="42">42</option>
-                     <option value="43">43</option>
-                     <option value="44">44</option>
-                     <option value="45">45</option>
-                     <option value="46">46</option>
-                     <option value="47">47</option>
-                     <option value="48">48</option>
-                     <option value="49">49</option>
-                     <option value="50">50</option>
-                     <option value="51">51</option>
-                     <option value="52">52</option>
-                     <option value="53">53</option>
-                     <option value="54">54</option>
-                     <option value="55">55</option>
-                     <option value="56">56</option>
-                     <option value="57">57</option>
-                     <option value="58">58</option>
-                     <option value="59">59</option>
-            </select>
-                  
-                   <div class="col-auto">
-                       <label class="col-form-label">minute(s)</label>
-                   </div>
 
     </div>
 
-       </div>
-           <div class="card-footer">
-              <a href="#" class="btn btn-primary">Generate</a>
-           </div>
+
+    <div class="generator-result">
+     <h4> Your Cron Script is </h4>
+    </div>
 </div>
 
 
-</div>   
+
 {% endblock %}
 
 

@@ -1,7 +1,10 @@
 body{
 	background-color: rgba(0, 23, 63, 1.0);
 	color:#fff;
-	font-family: poppins;
+	font-family:;
+	text-align: left;
+	line-height: 1.5;
+
 
 }
 
@@ -71,3 +74,36 @@ body{
 	font-size: 30px;
 }
 
+.style-generator{
+	font-family: sans-serif;
+}
+
+
+.nav-item{
+	font-size: 17px;
+}
+.generator td{
+	vertical-align: top;
+}
+
+.generator-1{
+    width: 400px;
+    margin-right: 40px;
+}
+
+.generator-1 > tbody > tr > td {
+    padding-top: 5px;
+    line-height: 24px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+ }
+ 
+ .radio-margin{
+  margin-right: 5px;
+
+ }
+
+ .card-footer{
+ 	text-align: left;
+ }
