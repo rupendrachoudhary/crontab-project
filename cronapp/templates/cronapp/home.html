@@ -18,12 +18,14 @@
 
 </div>
 
+<div class="container">
+<h2 class="cron-blog font-me">Generate Cron Expression {{ mins }}</h2>
 
-<h2 class="cron-blog">Generate Cron Expression</h2>
 
-
-<div class="container my-4 style-generator" style="color:black">
-        <div class="card" style="min-height:300px">
+<!--<div class="container my-4 style-generator" style="color:black"> -->
+          <form class="" method="POST" action="{% url 'home' %}">
+            {% csrf_token %}
+        <div class="card style-generator" style="color:black" style="min-height:300px">
 
             <div class="card-header">
                <!-- <h5 class="card-title">CronTab Generator</h5> -->
@@ -60,8 +62,11 @@
                     </li>
                 </ul>
             </div>
-         <div>
-            <form class="card-body form-control" method="GET" action="">
+         
+      <!--      <form class="card-body" method="GET" action="{% url 'home' %}"> -->
+        <!-- new div for card body -->
+            <div class="card-body">
+                
                 <div class="tab-content" id="myTabContent">
 
                    <div class="tab-pane fade show active" id="minute-tab-pane" role="tabpanel"
@@ -76,36 +81,36 @@
                      <tr>
                         <td class="shortcut-margin">
                            <div>
-                            <label class="radio" for="everyMinute"><input id="everyMinute" type="radio" checked="checked" value="*" name="minutes">
+                            <label class="radio" for="everyMinute"><input id="everyMinute" type="radio" checked="checked" value="*" name="cron_mins">
                                 Every Minute</label>
                              </div>
                              <div>
-                            <label class="radio" for="every5Minute"><input id="every5Minute" type="radio" value="*/5" name="minutes">
+                            <label class="radio" for="every5Minute"><input id="every5Minute" type="radio" value="*/5" name="cron_mins">
                                 Every 5 Minutes</label>
                              </div>
                              <div>
-                            <label class="radio" for="every10Minute"><input id="every10Minute" type="radio" value="*/10" name="minutes">
+                            <label class="radio" for="every10Minute"><input id="every10Minute" type="radio" value="*/10" name="cron_mins">
                                 Every 10 Minutes</label>
                              </div>
                              <div>
-                            <label class="radio" for="every15Minute"><input id="every15Minute" type="radio" value="*/15" name="minutes">
+                            <label class="radio" for="every15Minute"><input id="every15Minute" type="radio" value="*/15" name="cron_mins">
                                 Every 15 Minutes</label>
                              </div>
                              <div>
-                            <label class="radio" for="every20Minute"><input id="every20Minute" type="radio" value="*/20" name="minutes">
+                            <label class="radio" for="every20Minute"><input id="every20Minute" type="radio" value="*/20" name="cron_mins">
                                 Every 20 Minutes</label>
                              </div>
                             <div>
-                            <label class="radio" for="every30Minute"><input id="every30Minute" type="radio" value="*/30" name="minutes">
+                            <label class="radio" for="every30Minute"><input id="every30Minute" type="radio" value="*/30" name="cron_mins">
                                 Every 30 Minutes</label>
                              </div>
                              <div>
-                            <label class="radio" for="everyEvenMinute"><input id="everyEvenMinute" type="radio" value="*/2" name="minutes">
+                            <label class="radio" for="everyEvenMinute"><input id="everyEvenMinute" type="radio" value="*/2" name="cron_mins">
                                 Every Even Minute</label>
                              </div>
                              <div>
 
-                            <label class="radio" for="everyOddMinute"><input id="everyOddMinute" type="radio" value="1-59/2" name="minutes">
+                            <label class="radio" for="everyOddMinute"><input id="everyOddMinute" type="radio" value="1-59/2" name="cron_mins">
                                 Every Odd Minute</label></div>
 
                         </td>
@@ -114,10 +119,10 @@
                               <tbody>
                                  <tr>
                                     <td>
-                                      <input type="radio" value="select" name="minutes" class="radio-margin"> 
+                                      <input type="radio" value="select" name="cron_mins" class="radio-margin"> 
                                     </td>
                                     <td>
-                                                <select multiple size="10" name="selectMinutes">
+                                                <select multiple size="10" name="cron_mins">
                                                 <option value="0">0</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
@@ -205,31 +210,31 @@
                      <tr>
                         <td>
                            <div>
-                            <label class="radio" for="everyHour"><input id="everyHour" type="radio" checked="checked" value="*" name="hours">
+                            <label class="radio" for="everyHour"><input id="everyHour" type="radio" checked="checked" value="*" name="cron_hours">
                                 Every Hour</label>
                              </div>
                              <div>
-                            <label class="radio" for="every1Hour"><input id="every1Hour" type="radio" value="*/1" name="hours">
+                            <label class="radio" for="every1Hour"><input id="every1Hour" type="radio" value="*/1" name="cron_hours">
                                 Every 1 Hour</label>
                              </div>
                              <div>
-                            <label class="radio" for="every3Hour"><input id="every3Hour" type="radio" value="*/3" name="hours">
+                            <label class="radio" for="every3Hour"><input id="every3Hour" type="radio" value="*/3" name="cron_hours">
                                 Every 3 Hour</label>
                              </div>
                              <div>
-                            <label class="radio" for="every5Hour"><input id="every5Hour" type="radio" value="*/5" name="hours">
+                            <label class="radio" for="every5Hour"><input id="every5Hour" type="radio" value="*/5" name="cron_hours">
                                 Every 5 Hour</label></div>
                            <div>     
-                            <label class="radio" for="every6Hours"><input id="every6Hours" type="radio" value="*/6" name="hours">
+                            <label class="radio" for="every6Hours"><input id="every6Hours" type="radio" value="*/6" name="cron_hours">
                                 Every 6 Hours</label></div>
                                 <div>
-                            <label class="radio" for="every12Hours"><input id="every12Hours" type="radio" value="*/12" name="hours">
+                            <label class="radio" for="every12Hours"><input id="every12Hours" type="radio" value="*/12" name="cron_hours">
                                 Every 12 Hours</label></div>
                                 <div>
-                            <label class="radio" for="everyEvenHour"><input id="everyEvenHour" type="radio" value="*/2" name="hours">
+                            <label class="radio" for="everyEvenHour"><input id="everyEvenHour" type="radio" value="*/2" name="cron_hours">
                                 Every Even Hours</label></div>
                                 <div>
-                            <label class="radio" for="everyOddHour"><input id="everyOddHour" type="radio" value="1-23/2" name="hours">
+                            <label class="radio" for="everyOddHour"><input id="everyOddHour" type="radio" value="1-23/2" name="cron_hours">
                                 Every Odd Hours</label></div>
                         </td>
                         <td> 
@@ -237,10 +242,10 @@
                               <tbody>
                                  <tr>
                                     <td>
-                                      <input type="radio" value="select" name="hours" class="radio-margin"> 
+                                      <input type="radio" value="select" name="cron_hours" class="radio-margin"> 
                                     </td>
                                     <td>
-                                            <select multiple size="10" name="selectHours">
+                                            <select multiple size="10" name="cron_hours">
                                                 <option value="0">Midnight</option>
                                                 <option value="1">1am</option>
                                                 <option value="2">2am</option>
@@ -290,28 +295,28 @@
                   <tbody>
                      <tr>
                         <td>
-                             <div><label class="radio" for="everyday"><input id="everyday" type="radio" checked="checked" value="*" name="days">
+                             <div><label class="radio" for="everyday"><input id="everyday" type="radio" checked="checked" value="*" name="cron_days">
                               Every Day</label></div>
                                <div> 
-                              <label class="radio" for="every5Days"><input id="every5Days" type="radio" value="*/5" name="days">
+                              <label class="radio" for="every5Days"><input id="every5Days" type="radio" value="*/5" name="cron_days">
                               Every 5 Days</label></div>
                               <div>
-                              <label class="radio" for="every7Days"><input id="every7Days" type="radio" value="*/7" name="days">
+                              <label class="radio" for="every7Days"><input id="every7Days" type="radio" value="*/7" name="cron_days">
                               Every 7 Days</label> 
                               </div>
                               <div>                           
-                              <label class="radio" for="every10Days"><input id="every10Days" type="radio" value="*/10" name="days">
+                              <label class="radio" for="every10Days"><input id="every10Days" type="radio" value="*/10" name="cron_days">
                               Every 10 Days</label>
                            </div>
                            <div>
-                              <label class="radio" for="every15Days"><input id="every15Days" type="radio" value="*/15" name="days">
+                              <label class="radio" for="every15Days"><input id="every15Days" type="radio" value="*/15" name="cron_days">
                               Every Half Month</label></div>
                               <div>
-                              <label class="radio" for="everyEvenDay"><input id="everyEvenDay" type="radio" value="2-31/2" name="days">
+                              <label class="radio" for="everyEvenDay"><input id="everyEvenDay" type="radio" value="2-31/2" name="cron_days">
                               Even Days</label>
                            </div>
                            <div>
-                              <label class="radio" for="everyOddDay"><input id="everyOddDay" type="radio" value="1-31/2" name="days">
+                              <label class="radio" for="everyOddDay"><input id="everyOddDay" type="radio" value="1-31/2" name="cron_days">
                               Odd Days</label></div>
                         </td>
                         <td>
@@ -319,10 +324,10 @@
                               <tbody>
                                  <tr>
                                     <td>
-                                      <input type="radio" value="select" name="days" class="radio-margin"> 
+                                      <input type="radio" value="select" name="cron_days" class="radio-margin"> 
                                     </td>
                                     <td>
-                                          <select multiple size="10" name="selectDays">
+                                          <select multiple size="10" name="cron_days">
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -381,26 +386,26 @@
                      <tr>
                         <td>
                                 <div>
-                                <label class="radio" for="everyMonth"><input id="everyMonth" type="radio" checked="checked" value="*" name="months">
+                                <label class="radio" for="everyMonth"><input id="everyMonth" type="radio" checked="checked" value="*" name="cron_months">
                                  Every Month</label> 
                                  </div>
                                  <div>                               
-                                 <label class="radio" for="every3Months"><input id="every3Months" type="radio" value="*/3" name="months">
+                                 <label class="radio" for="every3Months"><input id="every3Months" type="radio" value="*/3" name="cron_months">
                                  Every Quarter</label>
                               </div>
                               <div>
-                                 <label class="radio" for="every4Months"><input id="every4Months" type="radio" value="*/4" name="months">
+                                 <label class="radio" for="every4Months"><input id="every4Months" type="radio" value="*/4" name="cron_months">
                                  Every 4 Months</label>
                               </div>
                               <div>
-                                 <label class="radio" for="every6Months"><input id="every6Months" type="radio" value="*/6" name="months">
+                                 <label class="radio" for="every6Months"><input id="every6Months" type="radio" value="*/6" name="cron_months">
                                  Every Half Year</label>
                               </div>
                               <div>
-                                 <label class="radio" for="everyEvenMonths"><input id="everyEvenMonths" type="radio" value="*/2" name="months">
+                                 <label class="radio" for="everyEvenMonths"><input id="everyEvenMonths" type="radio" value="*/2" name="cron_months">
                                  Even Months</label></div>
                                  <div>
-                                 <label class="radio" for="everyOddMonths"><input id="everyOddMonths" type="radio" value="1-11/2" name="months">
+                                 <label class="radio" for="everyOddMonths"><input id="everyOddMonths" type="radio" value="1-11/2" name="cron_months">
                                  Odd Months</label></div>
                         </td>
                         <td>
@@ -408,10 +413,10 @@
                               <tbody>
                                  <tr>
                                     <td>
-                                      <input type="radio" value="select" name="months" class="radio-margin"> 
+                                      <input type="radio" value="select" name="cron_months" class="radio-margin"> 
                                     </td>
                                     <td>
-                                          <select multiple size="10" name="selectMonths" class="cron">
+                                          <select multiple size="10" name="cron_months" class="cron">
                                                 <option value="1">Jan</option>
                                                 <option value="2">Feb</option>
                                                 <option value="3">Mar</option>
@@ -451,19 +456,19 @@
                      <tr>
                         <td>
                                <div>
-                                <label class="radio" for="everyWeekday"><input id="everyWeekday" name="weekdays" value="*" checked="checked" type="radio">
+                                <label class="radio" for="everyWeekday"><input id="everyWeekday" name="cron_weeks" value="*" checked="checked" type="radio">
                                 Every Day</label></div>
                                 <div>
-                                <label class="radio" for="everyNonWeekenDays"><input id="everyNonWeekenDays" name="weekdays" value="1-5" type="radio">
+                                <label class="radio" for="everyNonWeekenDays"><input id="everyNonWeekenDays" name="cron_weeks" value="1-5" type="radio">
                                 Monday - Friday</label></div>
                                 <div>
-                                <label class="radio" for="everyWeekenDays"><input id="everyWeekenDays" name="weekdays" value="0,6" type="radio">
+                                <label class="radio" for="everyWeekenDays"><input id="everyWeekenDays" name="cron_weeks" value="0,6" type="radio">
                                 Saturday - Sunday</label> </div>
                                 <div>
-                                <label class="radio" for="mondaytothursday"><input id="mondaytothursday" name="weekdays" value="1-4" type="radio">
+                                <label class="radio" for="mondaytothursday"><input id="mondaytothursday" name="cron_weeks" value="1-4" type="radio">
                                 Monday - Thursday</label>  </div>
                                 <div>
-                                <label class="radio" for="everysunday"><input id="everysunday" name="weekdays" value="0" type="radio">
+                                <label class="radio" for="everysunday"><input id="everysunday" name="cron_weeks" value="0" type="radio">
                                 Sunday</label>    </div>                 
                          </td>
                         <td>
@@ -471,10 +476,10 @@
                               <tbody>
                                  <tr>
                                     <td>
-                                      <input type="radio" value="select" name="weekdays" class="radio-margin"> 
+                                      <input type="radio" value="select" name="cron_weeks" class="radio-margin"> 
                                     </td>
                                     <td>
-                                         <select multiple size="10" name="selectWeekdays">
+                                         <select multiple size="10" name="cron_weeks">
                                                 <option value="0">Sun</option>
                                                 <option value="1">Mon</option>
                                                 <option value="2">Tue</option>
@@ -496,26 +501,55 @@
         </table>
      </div>    
    </div>
-              
-        
-
-        
-        </form>
+      
+      </div>        
+       
 </div>
-<div class="card-footer">
+<!-- tying this -->
+        <div class="card-footer footer-color">
             <button class="btn btn-primary" type="submit" name="submit">Generate</button>
         </div>
 
-    </div>
+        
+        </div>
+
+       <!-- <div class="card-footer footer-color">
+            <button class="btn btn-primary" type="submit" name="submit">Generate</button>
+        </div> -->
+
+    
 
 
-    <div class="generator-result">
-     <h4> Your Cron Script is </h4>
-    </div>
+
+
+</form>
+
+      <h2 class="cron-blog font-me"  style="margin-top:50px"> Your Cron Script is </h2>
+      
+        
+  <div class="mb-4 result-div margin-me" style="color:black">
+  
+    {{ mins }}
+  </div> 
+  
+ 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
-
-
-
 {% endblock %}
 
 

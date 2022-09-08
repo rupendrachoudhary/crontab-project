@@ -107,3 +107,24 @@ body{
  .card-footer{
  	text-align: left;
  }
+
+ .footer-color{
+background-color: rgba(0,0,0,.05);
+ }
+
+ .font-me{
+ 	font-family: poppins;
+ 	font-weight: bold;
+ 	
+ }
+ .margin-me{
+ 	margin-top: -25px;
+ }
+
+ .result-div{
+ 	width: 100%;
+ 	height: 70px;
+ 	border: 1px solid black;
+ 	background-color: white;
+ 	margin-top: 10px;
+ }
