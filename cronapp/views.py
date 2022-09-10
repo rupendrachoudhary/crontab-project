@@ -5,8 +5,18 @@ from django.views.generic import TemplateView
 class HomeView(TemplateView):
     template_name = 'cronapp/home.html'
 
-    def cronoutput(self, request, *args, **kwargs):
-        mins = request.POST.get('cron_mins')
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        context = {
+            'mins_iterator':range(0, 60),
+
+        }
+        return context
+
+
+    def post(self, request, *args, **kwargs):
+        mins = int(request.POST.get('cron_mins'))
         hours = request.POST.get('cron_hours')
         days = request.POST.get('cron_days')
         months = request.POST.get('cron_months')
@@ -18,10 +28,9 @@ class HomeView(TemplateView):
             'days': days,
             'months': months,
             'weeks': weeks,
+            'mins_iterator':range(0, 60),
 
         }
-
-        print("hello")
         print(f'{mins}{hours}{days}{months}{weeks}')
         return render(request, self.template_name, context)
 
