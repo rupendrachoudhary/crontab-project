@@ -10,17 +10,19 @@ class HomeView(TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
         context = {
             'mins_iterator':range(0, 60),
+            'hours_iterator':range(0,24),
+            'days_iterator':range(1,31),
 
         }
         return context
 
 
     def post(self, request, *args, **kwargs):
-        mins = int(request.POST.get('cron_mins'))
-        hours = request.POST.get('cron_hours')
-        days = request.POST.get('cron_days')
+        mins = str(request.POST.get('cron_mins'))
+        hours = str(request.POST.get('cron_hours'))
+        days = str(request.POST.get('cron_days'))
         months = request.POST.get('cron_months')
-        weeks = request.POST.get('cron_weeks')
+        weeks = str(request.POST.get('cron_weeks'))
 
         context = {
             'mins': mins,
@@ -29,6 +31,8 @@ class HomeView(TemplateView):
             'months': months,
             'weeks': weeks,
             'mins_iterator':range(0, 60),
+            'hours_iterator':range(0,23),
+            'days_iterator':range(1,31),
 
         }
         print(f'{mins}{hours}{days}{months}{weeks}')

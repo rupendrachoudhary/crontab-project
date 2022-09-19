@@ -19,13 +19,13 @@
 </div>
 
 <div class="container">
-    <h2 class="cron-blog font-me">Generate Cron Expression {{ mins }}</h2>
+    <h2 class="cron-blog font-me">Generate Cron Expression</h2>
 
 
     <!--<div class="container my-4 style-generator" style="color:black"> -->
     <form class="" method="POST" action="{% url 'home' %}">
         {% csrf_token %}
-        <div class="card style-generator" style="color:black" style="min-height:300px">
+        <div class="card style-generator card-op" style="color:black" style="min-height:300px">
 
             <div class="card-header">
                 <!-- <h5 class="card-title">CronTab Generator</h5> -->
@@ -63,8 +63,7 @@
                 </ul>
             </div>
 
-            <!--      <form class="card-body" method="GET" action="{% url 'home' %}"> -->
-            <!-- new div for card body -->
+            
             <div class="card-body">
 
                 <div class="tab-content" id="myTabContent">
@@ -236,7 +235,7 @@
                                                                        class="radio-margin">
                                                             </td>
                                                             <td>
-                                                                <select multiple size="10" name="cron_hours">
+                                                                <select multiple size="10" name="cron_hours[]">
                                                                     <option value="0">Midnight</option>
                                                                     <option value="1">1am</option>
                                                                     <option value="2">2am</option>
@@ -260,7 +259,7 @@
                                                                     <option value="20">8pm</option>
                                                                     <option value="21">9pm</option>
                                                                     <option value="22">10pm</option>
-                                                                    <option value="23">11pm</option>
+                                                                    <option value="23">11pm</option>  
                                                                 </select>
                                                             </td>
                                                         </tr>
@@ -341,40 +340,14 @@
                                                                        class="radio-margin">
                                                             </td>
                                                             <td>
-                                                                <select multiple size="10" name="cron_days">
-                                                                    <option value="1">1</option>
-                                                                    <option value="2">2</option>
-                                                                    <option value="3">3</option>
-                                                                    <option value="4">4</option>
-                                                                    <option value="5">5</option>
-                                                                    <option value="6">6</option>
-                                                                    <option value="7">7</option>
-                                                                    <option value="8">8</option>
-                                                                    <option value="9">9</option>
-                                                                    <option value="10">10</option>
-                                                                    <option value="11">11</option>
-                                                                    <option value="12">12</option>
-                                                                    <option value="13">13</option>
-                                                                    <option value="14">14</option>
-                                                                    <option value="15">15</option>
-                                                                    <option value="16">16</option>
-                                                                    <option value="17">17</option>
-                                                                    <option value="18">18</option>
-                                                                    <option value="19">19</option>
-                                                                    <option value="20">20</option>
-                                                                    <option value="21">21</option>
-                                                                    <option value="22">22</option>
-                                                                    <option value="23">23</option>
-                                                                    <option value="24">24</option>
-                                                                    <option value="25">25</option>
-                                                                    <option value="26">26</option>
-                                                                    <option value="27">27</option>
-                                                                    <option value="28">28</option>
-                                                                    <option value="29">29</option>
-                                                                    <option value="30">30</option>
-                                                                    <option value="31">31</option>
-                                                                </select>
+                                                                <select multiple size="10" name="days">
+                                                                     {% for i in days_iterator %} 
+                                             
+                                 <option value="{{i}}" {% if i == days %}selected {% endif %}>{{i}}</option>
+ 
+                                                                     {% endfor %}
 
+                                                                </select>                                         
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -449,7 +422,7 @@
                                                                        class="radio-margin">
                                                             </td>
                                                             <td>
-                                                                <select multiple size="10" name="cron_months"
+                                                                <select multiple size="10" name="months"
                                                                         class="cron">
                                                                     <option value="1">Jan</option>
                                                                     <option value="2">Feb</option>
@@ -528,7 +501,7 @@
                                                                        class="radio-margin">
                                                             </td>
                                                             <td>
-                                                                <select multiple size="10" name="cron_weeks">
+                                                                <select multiple size="10" name="weeks">
                                                                     <option value="0">Sun</option>
                                                                     <option value="1">Mon</option>
                                                                     <option value="2">Tue</option>
@@ -556,26 +529,31 @@
             </div>
             <!-- tying this -->
             <div class="card-footer footer-color">
-                <button class="btn btn-primary" type="submit" name="submit">Generate</button>
+               <button class="btn btn-primary" type="submit" name="submit">Generate</button>
             </div>
 
 
         </div>
 
-        <!-- <div class="card-footer footer-color">
-             <button class="btn btn-primary" type="submit" name="submit">Generate</button>
-         </div> -->
-
+        
 
     </form>
 
     <h2 class="cron-blog font-me" style="margin-top:50px"> Your Cron Script is </h2>
 
 
-    <div class="mb-4 result-div margin-me" style="color:black">
 
-        {{ mins }}
-    </div>
+
+
+<div class="card mb-4 card-op" id="bookmark">
+  <h5 class="card-header text-center card-title font-me" style="color:#2455a9">CroNinja Output</h5>
+  <div class="card-body card-op">
+   <!-- <h5 class="card-title card-op">Your Cron Expression is </h5> -->
+    <p class="card-text" style="color:red ; font-size:20px"> <span style="color:blue">{{ mins }}</span><span style="color:red"> {{hours}}</span> <span style="color:#152a2a">{{days}}</span><span style="color:#15d915fc"> {{months}}</span><span style="color:purple"> {{weeks}}</span> </p>
+       
+  </div>
+</div>
+
 
 
 </div>
