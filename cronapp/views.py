@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
-
 class HomeView(TemplateView):
     template_name = 'cronapp/home.html'
 
@@ -23,6 +22,9 @@ class HomeView(TemplateView):
         days = str(request.POST.get('cron_days'))
         months = request.POST.get('cron_months')
         weeks = str(request.POST.get('cron_weeks'))
+        
+        if mins == 'select':
+            mins = ','.join(request.POST.getlist('cron_mins[]'))
 
         context = {
             'mins': mins,

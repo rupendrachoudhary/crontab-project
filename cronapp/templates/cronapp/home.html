@@ -141,10 +141,10 @@
                                                                        class="radio-margin">
                                                             </td>
                                                             <td> 
-                                                                <select multiple size="10" name="cron_mins">
+                                                                <select id="cron_manual_select"  multiple size="10" name="cron_mins[]">
                                                                     {% for i in mins_iterator %} 
                                              
-              <option value="{{i}}" {% if i == mins %}selected {% endif %}>{{i}}</option>
+              <option value="{{i}}">{{i}}</option>
 
                     {% endfor %}
                                                                 </select>
@@ -557,6 +557,9 @@
 
 
 </div>
+<script type="text/javascript">
+    document.getElementById('cron_manual_select').addEventListener('change', function(){document.querySelector('input[value="select"]').checked = true; });
+</script>
 {% endblock %}
 
 
