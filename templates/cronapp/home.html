@@ -1,0 +1,108 @@
+{% extends "cronapp/base.html" %}
+
+{% block content %}
+
+
+<div class="container my-4 cron-guide">
+   <p>If you want to periodically perform a task (e.g. sending Emails, backing up database, doing regular maintenance, etc.) at specified times and dates, there are two ways to set scheduled tasks:</p>
+<ul>
+   <li> Method 1: Use our online cron job service that will save you a headache.</li>
+   <li>Method 2: Use Cron available in Unix/Linux systems.</li>
+</ul>
+<p>
+If you go with method 2, the following generator can help you produce a crontab syntax that you can copy & paste to your crontab file (You can open the file by using command crontab –e). Below the generated crontab syntax, a list of run times will be displayed too. The predictions will help you ensure that you set the time and date right.</p>
+
+   </div>
+<div class="container">
+
+<h2 class="cron-blog">Generate Cron Expression {{mins}}</h2>
+
+   <div class="card text-center my-4" style="min-height:300px">
+        <div class="card-header">
+          <!--  <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="true" href="#">Minute</a>
+                </li>
+              
+                <li class="nav-item">
+                <a class="nav-link" href="#">Hour</a>
+                </li>
+      
+                <li class="nav-item">
+                <a class="nav-link" href="#">Day(Month)</a>
+                </li>
+      
+                <li class="nav-item">
+                <a class="nav-link" href="#">Month</a>
+                </li>
+      
+                <li class="nav-item">
+                <a class="nav-link" href="#">Day(Week)</a>
+                </li>
+           </ul> -->
+           <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Minute</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Hour</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Day(Month)</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Month</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Day(Week)</button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+</div>
+        </div>
+
+  <div class="card-body">
+    <form action="/" method="POST">
+      {% csrf_token %}
+    <div class="form-row align-items-center">
+        <div class="col-auto">
+            <label class="col-form-label">Every</label>
+        </div>
+        <div class="col-md-1">
+            <select multiple size="10" class="form-control" name="cron_mins">
+                  
+                      {% for i in range(0, 59) %} {{mins}} {{i}}
+
+              <option value="{{i}}" {% if i == mins %}selected {% endif %}>{{i}}</option>
+
+                    {% endfor %}
+            </select>
+                  
+                   <div class="col-auto">
+                       <label class="col-form-label">minute(s)</label>
+                   </div>
+
+    </div>
+
+       </div>
+    
+           <div class="card-footer">
+              <button type="submit" href="#" class="btn btn-primary">Generate</a>
+           </div>
+            </form>
+</div>
+
+
+</div>   
+{% endblock %}
+
+
+
+
+
+

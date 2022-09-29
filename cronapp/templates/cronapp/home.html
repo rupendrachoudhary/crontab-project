@@ -137,11 +137,13 @@
                                                         <tbody>
                                                         <tr>
                                                             <td>
-                                                                <input type="radio" value="select" name="cron_mins"
+                                                                <input type="radio" id="i1" value="select" name="cron_mins"
                                                                        class="radio-margin">
                                                             </td>
                                                             <td> 
-                                                                <select id="cron_manual_select"  multiple size="10" name="cron_mins[]">
+
+                                                                <select class="item" multiple size="10" name="cron_mins[]">
+
                                                                     {% for i in mins_iterator %} 
                                              
               <option value="{{i}}">{{i}}</option>
@@ -231,11 +233,11 @@
                                                         <tbody>
                                                         <tr>
                                                             <td>
-                                                                <input type="radio" value="select" name="cron_hours"
+                                                                <input type="radio" id="i2" value="select" name="cron_hours"
                                                                        class="radio-margin">
                                                             </td>
                                                             <td>
-                                                                <select multiple size="10" name="cron_hours[]">
+                                                                <select class="item" id="item2" multiple size="10" name="cron_hours[]">
                                                                     <option value="0">Midnight</option>
                                                                     <option value="1">1am</option>
                                                                     <option value="2">2am</option>
@@ -336,14 +338,14 @@
                                                         <tbody>
                                                         <tr>
                                                             <td>
-                                                                <input type="radio" value="select" name="cron_days"
+                                                                <input type="radio" id="i3" value="select" name="cron_days"
                                                                        class="radio-margin">
                                                             </td>
                                                             <td>
-                                                                <select multiple size="10" name="days">
+                                                                <select class="item" id="item3" multiple size="10" name="cron_days[]">
                                                                      {% for i in days_iterator %} 
                                              
-                                 <option value="{{i}}" {% if i == days %}selected {% endif %}>{{i}}</option>
+                                 <option value="{{i}}">{{i}}</option>
  
                                                                      {% endfor %}
 
@@ -418,12 +420,11 @@
                                                         <tbody>
                                                         <tr>
                                                             <td>
-                                                                <input type="radio" value="select" name="cron_months"
+                                                                <input type="radio" id="i4" value="select" name="cron_months"
                                                                        class="radio-margin">
                                                             </td>
                                                             <td>
-                                                                <select multiple size="10" name="months"
-                                                                        class="cron">
+                                         <select class="item" id="item4" multiple size="10" name="cron_months[]">
                                                                     <option value="1">Jan</option>
                                                                     <option value="2">Feb</option>
                                                                     <option value="3">Mar</option>
@@ -497,11 +498,11 @@
                                                         <tbody>
                                                         <tr>
                                                             <td>
-                                                                <input type="radio" value="select" name="cron_weeks"
+                                                                <input type="radio" id="i5" value="select" name="cron_weeks"
                                                                        class="radio-margin">
                                                             </td>
                                                             <td>
-                                                                <select multiple size="10" name="weeks">
+                                                                <select class="item" id="item5" multiple size="10" name="cron_weeks[]">
                                                                     <option value="0">Sun</option>
                                                                     <option value="1">Mon</option>
                                                                     <option value="2">Tue</option>
@@ -545,11 +546,11 @@
 
 
 
-<div class="card mb-4 card-op" id="bookmark">
+<div class="card mb-4 card-op" >
   <h5 class="card-header text-center card-title font-me" style="color:#2455a9">CroNinja Output</h5>
   <div class="card-body card-op">
    <!-- <h5 class="card-title card-op">Your Cron Expression is </h5> -->
-    <p class="card-text" style="color:red ; font-size:20px"> <span style="color:blue">{{ mins }}</span><span style="color:red"> {{hours}}</span> <span style="color:#152a2a">{{days}}</span><span style="color:#15d915fc"> {{months}}</span><span style="color:purple"> {{weeks}}</span> </p>
+    <p class="card-text" id="bookmark" style="color:red ; font-size:20px"> <span style="color:blue">{{ mins }}</span><span style="color:red"> {{hours}}</span> <span style="color:#152a2a">{{days}}</span><span style="color:#15d915fc"> {{months}}</span><span style="color:purple"> {{weeks}}</span> </p>
        
   </div>
 </div>
@@ -557,13 +558,64 @@
 
 
 </div>
+
+
+ <!-- <script type="text/javascript">
+    document.getElementsByClassName('cron_manual_select').addEventListener('change', 
+        function(){
+            document.querySelector('input[value="select"]').checked = true;
+             });  -->
+   
+<!-- <script type="text/javascript">
+    const elements = document.querySelectorAll('.item');
+
+    elements.forEach(function(item1, count){
+        item1.addEventListner('change',function(){
+            document.querySelector('input[value="select"]').checked = true;
+        });
+    });
+    
+</script>  -->
+
+ <!-- <script type="text/javascript">
+
+for(let i=0; i<document.querySelectorAll(".item").length; i++) {
+    document.querySelectorAll('.item')[i].addEventListener("change", 
+    function() {
+        document.querySelector('input[value="select"]').checked = true;
+    });
+}
+ </script>  -->
+
+
+<!-- <script type="text/javascript">
+     elements = document.querySelectorAll(".item");
+
+              for(let i=0; i<elements.length; i++) {
+                       elements[i].addEventListener("change", 
+                       function() {
+
+                       document.querySelector('input[value="select"]').checked = true;
+                                   });
+                                                    }
+ </script>  -->
+
 <script type="text/javascript">
-    document.getElementById('cron_manual_select').addEventListener('change', function(){document.querySelector('input[value="select"]').checked = true; });
-</script>
-{% endblock %}
+     elements = document.querySelectorAll(".item");
+
+              for(let i=0; i<elements.length; i++) {
+                       elements[i].addEventListener("change", 
+                       function(e) {
+                        console.log(e.target);
+                        el = e.target.closest('tr');
+                        selector = el.querySelector('td input');
+                        selector.checked = true;
+                                   });
+                                                    }
+ </script>
 
 
 
-
+{% endblock content %}
 
 
