@@ -28,22 +28,42 @@
                 <a class="nav-item nav-link right-menu" href="{% url 'blog' %}">Blog</a>
                 <a class="nav-item nav-link right-menu" href="{% url 'contact' %}">Contact us</a>
             </div>
-            <!-- <b class="brand-name">CroNinja</b> -->
+            
         </div>
 
 
     </nav>
 </header>
 
-<div class="container">
+<div class="container main-page">
     <h1 class="text-center title-font">Crontab Generating Ninja</h1>
     <p class="text-center tagline-font">Automate your task with our Ninja and save the time</p>
     <hr>
     {% block content %}
+
+
     {% endblock %}
+
 </div>
 
+<div class="container">
 
+<nav class="navbar navbar-expand-md navcolor design-footer">
+        <div class="container">
+            
+
+            <div class="navbar-nav ms-auto mx-auto">
+                <a class="nav-item nav-link right-menu" href="{% url 'privacy-policies' %}">Privacy Policy</a>
+                <a class="nav-item nav-link right-menu" href="{% url 'terms_condition' %}">Terms & Condition</a>
+                 <a class="nav-item nav-link right-menu" href="{% url 'cookie-policies' %}">Cookie Policy</a>
+            </div>
+            
+        </div>
+
+
+    </nav>
+    
+</div>
 <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->

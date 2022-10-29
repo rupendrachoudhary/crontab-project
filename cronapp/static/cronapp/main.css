@@ -1,3 +1,11 @@
+html, body {
+	height: 100%;
+}
+
+.main-page{
+	min-height: 100%;
+}
+
 body{
 	background-color: rgba(0, 23, 63, 1.0);
 	color:#fff;
@@ -127,4 +135,7 @@ background-color: rgba(0,0,0,.05);
  }
  */
 
-  	
+ 
+.design-footer{
+	height: 50px;
+} 
