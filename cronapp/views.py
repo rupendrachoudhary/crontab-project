@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 
 
 class HomeView(TemplateView):
@@ -181,3 +181,14 @@ class PrivacyView(TemplateView):
 
 class CookieView(TemplateView):
     template_name = 'cronapp/cookie_policy.html'
+
+
+class MinuteView(DetailView):
+    def get_queryset(self,request, *args, **kwargs):
+        n_min = date.get('n')
+        return HttpResponse ({'n_min':n_min})
+    
+        
+
+    
+    
