@@ -84,6 +84,7 @@
                                                                                                       type="radio"
                                                                                                       checked="checked"
                                                                                                       value="*"
+                                                                                                      
                                                                                                       name="cron_mins">
                                                             Every Minute</label>
                                                     </div>
@@ -91,36 +92,54 @@
                                                         <label class="radio" for="every5Minute"><input id="every5Minute"
                                                                                                        type="radio"
                                                                                                        value="*/5"
+                                                                                                       {% if n == '5' %}
+                                                                                                       checked
+                                                                                                       {% endif %}
                                                                                                        name="cron_mins">
                                                             Every 5 Minutes</label>
                                                     </div>
                                                     <div>
                                                         <label class="radio" for="every10Minute"><input
                                                                 id="every10Minute" type="radio" value="*/10"
+                                                                {% if n == '10' %}
+                                                                checked
+                                                                {% endif %}
                                                                 name="cron_mins">
                                                             Every 10 Minutes</label>
                                                     </div>
                                                     <div>
                                                         <label class="radio" for="every15Minute"><input
                                                                 id="every15Minute" type="radio" value="*/15"
+                                                                {% if n == '15' %}
+                                                                checked
+                                                                {% endif %}
                                                                 name="cron_mins">
                                                             Every 15 Minutes</label>
                                                     </div>
                                                     <div>
                                                         <label class="radio" for="every20Minute"><input
                                                                 id="every20Minute" type="radio" value="*/20"
+                                                                {% if n == '20' %}
+                                                                checked
+                                                                {% endif %}
                                                                 name="cron_mins">
                                                             Every 20 Minutes</label>
                                                     </div>
                                                     <div>
                                                         <label class="radio" for="every30Minute"><input
                                                                 id="every30Minute" type="radio" value="*/30"
+                                                                {% if n == '30' %}
+                                                                checked
+                                                                {% endif %}
                                                                 name="cron_mins">
                                                             Every 30 Minutes</label>
                                                     </div>
                                                     <div>
                                                         <label class="radio" for="everyEvenMinute"><input
                                                                 id="everyEvenMinute" type="radio" value="*/2"
+                                                                {% if p == '2' %}
+                                                                checked
+                                                                {% endif %}
                                                                 name="cron_mins">
                                                             Every Even Minute</label>
                                                     </div>
@@ -128,6 +147,7 @@
 
                                                         <label class="radio" for="everyOddMinute"><input
                                                                 id="everyOddMinute" type="radio" value="1-59/2"
+
                                                                 name="cron_mins">
                                                             Every Odd Minute</label></div>
 

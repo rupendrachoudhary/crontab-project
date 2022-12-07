@@ -1,19 +1,29 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, DetailView
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
+import pdb
 
 
-class HomeView(TemplateView):
+
+class DataMixin(TemplateView):
     template_name = 'cronapp/home.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(HomeView, self).get_context_data(**kwargs)
+    def get_context_data(self, **kwargs):      
         context = {
             'mins_iterator': range(0, 60),
             'days_iterator': range(1, 31),
-
+            
         }
         return context
 
+
+
+
+class HomeView(DataMixin):
+
+    
+    
     def post(self, request, *args, **kwargs):
         mins = str(request.POST.get('cron_mins'))
         hours = request.POST.get('cron_hours')
@@ -44,6 +54,22 @@ class HomeView(TemplateView):
                 mins += str(start)
             else:
                 mins += str(start) + "-" + str(end)
+
+        else:
+            m = request.POST.get('cron_mins')
+            if m == '*':
+                
+                return HttpResponseRedirect(reverse('everyminute'))
+            else:
+                m = m.split('/')
+                if m[1] == '2':
+                    return HttpResponseRedirect(reverse('everyevenminute', kwargs=))
+                
+                else :
+                    return HttpResponseRedirect(reverse('minutes', kwargs={'n':m[1]}))
+
+        
+        
 
 
         if hours == 'select':
@@ -145,8 +171,7 @@ class HomeView(TemplateView):
             else:
                 weeks += str(start) + "-" + str(end)
 
-
-
+       
 
         context = {
 
@@ -183,10 +208,13 @@ class CookieView(TemplateView):
     template_name = 'cronapp/cookie_policy.html'
 
 
-class MinuteView(DetailView):
-    def get_queryset(self,request, *args, **kwargs):
-        n_min = date.get('n')
-        return HttpResponse ({'n_min':n_min})
+class MinuteView(DataMixin):
+    def get(self,request, *args, **kwargs):
+        n = kwargs.get('n')
+        context = {
+        'n':n
+        }
+        return render(request, self.template_name, context)
     
         
 
